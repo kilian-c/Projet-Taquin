@@ -1,15 +1,24 @@
-#include <iostream>
-#include <cassert>
-#include <stdlib.h>
+/**
+ * @file Tableau2D.cpp
+ * Projet SDA
+ * @author Kilian CHOLLET, Abdulmajid NASSER
+ * @version 1 - 26/12/2015
+ * @brief Composant des fonctions d'un Tableau 2D
+ */
 
 #include "tableau2D.h"
 
 using namespace std;
 
-/* @brief initialiser, initialiser un damier de n lignes et p colonnes
- * @param[in-out] t, tableau à 2 dimensions à initialiser(Tableau2D)
- * @param[in] n, nombre de lignes
- * @param[in] p, nombre de lignes
+/* -------------------------------------------------- */
+/* -------------------- SPRINT 1 -------------------- */
+/* -------------------------------------------------- */
+
+/**
+ * @brief initialiser, initialiser un damier de n lignes et p colonnes
+ * @param [in-out] t, tableau à 2 dimensions à initialiser(Tableau2D)
+ * @param [in] n, nombre de lignes
+ * @param [in] p, nombre de lignes
 */
 void initialiser(Tableau2D& t, int n, int p)
 {
@@ -24,7 +33,7 @@ void initialiser(Tableau2D& t, int n, int p)
         exit(1);
     }
 
-    for(int i = 0; i < t.lignes; i++)
+    for(unsigned int i = 0; i < t.lignes; i++)
     {
         // On alloue dynamiquement chaque colonne du damier
         t.damier[i] = new(nothrow) Item[t.colonnes];
@@ -36,22 +45,23 @@ void initialiser(Tableau2D& t, int n, int p)
     }
 }
 
-/* @brief detruire, détruit un Tableau2D
- * @param[in-out] t, tableau à 2 dimensions à détruire (Tableau2D)
+/**
+ * @brief detruire, détruit un Tableau2D
+ * @param [in-out] t, tableau à 2 dimensions à détruire (Tableau2D)
 */
 void detruire(Tableau2D& t)
 {
-    for(int i = 0; i < t.lignes; i++)
+    for(unsigned int i = 0; i < t.lignes; i++)
     {
         delete[] t.damier[i];
     }
-
     delete[] t.damier;
     t.damier = NULL;
 }
 
-/* @brief lire,
- * @param[in-out] t, tableau à 2 dimensions à détruire (Tableau2D)
+/**
+ * @brief lire,
+ * @param [in-out] t, tableau à 2 dimensions à détruire (Tableau2D)
 */
 void lire(Tableau2D& t)
 {
@@ -104,9 +114,9 @@ void lire(Tableau2D& t)
     nbValeurs = 0;
 
     // Insertion des valeurs de entrees dans le damier
-    for(int i = 0; i < t.lignes; i++)
+    for(unsigned int i = 0; i < t.lignes; i++)
     {
-        for(int j = 0; j < t.colonnes; j++)
+        for(unsigned int j = 0; j < t.colonnes; j++)
         {
             t.damier[i][j] = entrees[nbValeurs];
             nbValeurs++;
@@ -115,29 +125,30 @@ void lire(Tableau2D& t)
 
 }
 
-/* @brief afficher, affiche le tableau 2D
- * @param[in] t, tableau 2D à afficher
+/**
+ * @brief afficher, affiche le tableau 2D
+ * @param [in] t, tableau 2D à afficher
 */
 void afficher(const Tableau2D& t)
 {
-    cout << "Damier : " << t.lignes << " lignes, " << t.colonnes << " colonnes" << endl;
-
-    for(int i = 0; i < t.lignes; i++)
+    for(unsigned int i = 0; i < t.lignes; i++)
     {
-        for(int j = 0; j < t.colonnes; j++)
+        for(unsigned int j = 0; j < t.colonnes; j++)
         {
             // On affiche le # à la place du 0
             if(t.damier[i][j] != 0)
             {
-                cout << " " << t.damier[i][j] << " ";
+                cout << setw(3) << t.damier[i][j];
             }
             else
             {
-                cout << " # ";
+                cout << setw(3) << "#";
             }
         }
         cout << endl;
     }
 }
+
+
 
 

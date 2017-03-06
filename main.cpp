@@ -1,11 +1,17 @@
-#include <iostream>
-#include <cassert>
-#include "tableau2D.h"
+/**
+ * @file main.cpp
+ * Projet SDA
+ * @author Kilian CHOLLET, Abdulmajid NASSER
+ * @version 1 - 31/12/2015
+ * @brief Fonction principale du programme pour résoudre un jeu de taquin
+ */
+
+#include "Taquin.h"
 
 using namespace std;
 
 /* ---------- POUR LE DEBUGGAGE ---------- */
-bool LOGGING_ON = true;
+bool LOGGING_ON = false;
 void log(const char* msg)
 {
     if(LOGGING_ON)
@@ -17,26 +23,12 @@ void log(const char* msg)
 
 int main()
 {
+    Taquin t;
 
-    Tableau2D taquin;
-    int lignes, colonnes;
+    initialiser(t);
 
-    cin >> lignes;
-    cin >> colonnes;
-
-    assert(lignes > 0 && colonnes > 0);
-
-    log("( Initialiser )");
-    initialiser(taquin, lignes, colonnes);
-
-    log("( Lire )");
-    lire(taquin);
-
-    log("( Afficher )");
-    afficher(taquin);
-
-    log("( Detruire )");
-    detruire(taquin);
+    do{} while(!jouer(t));
+    afficherSolution(t);
 
     return 0;
 }
