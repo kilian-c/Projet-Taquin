@@ -1,33 +1,33 @@
 /**
  * @file Taquin.h
  * Projet SDA
- * @author Kilian CHOLLET, Abdulmajid NASSER
+ * @author Kilian C
  * @version 1 - 02/01/2016
- * @brief Composant des fonctions liées à un jeu de Taquin
+ * @brief Composant des fonctions liÃ©es Ã  un jeu de Taquin
  */
 
 #include "Taquin.h"
 
 /**
- * @brief initialiser, crée un jeu de taquin avec l'état initial
- * @param [in-out] t, Taquin à initialiser
+ * @brief initialiser, crÃ©e un jeu de taquin avec l'Ã©tat initial
+ * @param [in-out] t, Taquin Ã  initialiser
 */
 void initialiser(Taquin& t)
 {
-    // Déclaration et initialisation de lee - Liste de Etats Explorés)
+    // DÃ©claration et initialisation de lee - Liste de Etats ExplorÃ©s)
     Liste lee;
     initialiser(lee);
 
-    // Déclaration et initialisation de leae - Liste de Etats A Explorer)
+    // DÃ©claration et initialisation de leae - Liste de Etats A Explorer)
     Liste leae;
     initialiser(leae);
 
-    // Demande du nbre de colonnes et de lignes à partir du flot d'entrée standard
+    // Demande du nbre de colonnes et de lignes Ã  partir du flot d'entrÃ©e standard
     unsigned int lignes, colonnes;
     cin >> lignes;
     cin >> colonnes;
 
-    Etat e_init; // Déclaration de l'état initial
+    Etat e_init; // DÃ©claration de l'Ã©tat initial
     e_init.d.lignes = lignes;
     e_init.d.colonnes = colonnes;
 
@@ -37,20 +37,20 @@ void initialiser(Taquin& t)
     // Lecture du damier initial
     lire(e_init.d);
 
-    // On définit le mouvement initial à FIXE puisqu'il n'y en a pas encore eu,
-    // ainsi que g, le nombre de mouvements à 0
+    // On dÃ©finit le mouvement initial Ã  FIXE puisqu'il n'y en a pas encore eu,
+    // ainsi que g, le nombre de mouvements Ã  0
     e_init.m = FIXE;
     e_init.g = 0;
     e_init.h = heuristique(e_init);
 
-    // On cherche le # dans le damier (qui vaut 0) pour obtenir ses coordonnées
+    // On cherche le # dans le damier (qui vaut 0) pour obtenir ses coordonnÃ©es
     for(unsigned int i = 0; i < lignes; i++)
     {
         for(unsigned int j = 0; j < colonnes; j++)
         {
             if(e_init.d.damier[i][j] == 0)
             {
-                // Obtention des coordonnées du 0
+                // Obtention des coordonnÃ©es du 0
                 e_init.x = i;
                 e_init.y = j;
             }
@@ -61,11 +61,11 @@ void initialiser(Taquin& t)
     t.leae = leae;
     t.lee = lee;
 
-    // On détruit les deux listes devenues obsolètes
+    // On dÃ©truit les deux listes devenues obsolÃ¨tes
     detruire(leae);
     detruire(lee);
 
-    // On insère dans leae l'état initial que nous venons de créer
+    // On insÃ¨re dans leae l'Ã©tat initial que nous venons de crÃ©er
     inserer(t.leae, 0, e_init);
 
     // On affiche le nombre de lignes et de colonnes du taquin
@@ -74,10 +74,10 @@ void initialiser(Taquin& t)
 
 
 /**
- * @brief Deplace le # dans le damier, retourne l'état résultant
+ * @brief Deplace le # dans le damier, retourne l'Ã©tat rÃ©sultant
  * @param [in] mv, Direction dans laquelle doit bouger le #
- * @param [in] e, Etat depuis lequel le mouvement doit être effectué
- * @return er, etat résultant du mouvement
+ * @param [in] e, Etat depuis lequel le mouvement doit Ãªtre effectuÃ©
+ * @return er, etat rÃ©sultant du mouvement
 */
 Etat deplacement(Mouvement mv, const Etat& e)
 {
@@ -127,7 +127,7 @@ Etat deplacement(Mouvement mv, const Etat& e)
 
 /**
  * @brief Affiche le contenu des listes lee et leae
- * @param [in] Taquin t, le taquin à afficher
+ * @param [in] Taquin t, le taquin Ã  afficher
 */
 void afficher(Taquin& t)
 {
@@ -139,9 +139,9 @@ void afficher(Taquin& t)
 }
 
 /**
- * @brief renvoie vrai si l'état existe déjà dans le taquin
- * @param [in] ef, état dont on doit vérifier l'existence
- * @param [in-out] t, taquin dans lequel la vérification se fait
+ * @brief renvoie vrai si l'Ã©tat existe dÃ©jÃ  dans le taquin
+ * @param [in] ef, Ã©tat dont on doit vÃ©rifier l'existence
+ * @param [in-out] t, taquin dans lequel la vÃ©rification se fait
  * @return res
 */
 bool appartient(const Etat& ef, Taquin& t)
@@ -164,13 +164,13 @@ bool appartient(const Etat& ef, Taquin& t)
 }
 
 /**
- * @brief Renvoie vrai s’il s’agir de l’état final, faux sinon
+ * @brief Renvoie vrai sâ€™il sâ€™agir de lâ€™Ã©tat final, faux sinon
  * @param [in] e
  * @return bool
 */
 bool but(const Etat& e)
 {
-    // On crée l'état final
+    // On crÃ©e l'Ã©tat final
     Etat eFinal;
     initialiser(eFinal.d, e.d.lignes, e.d.colonnes);
     unsigned int cpt = 1;
@@ -194,9 +194,9 @@ bool but(const Etat& e)
 }
 
 /**
- * @brief Indique si un unique état est de valeur f minimale dans leae
+ * @brief Indique si un unique Ã©tat est de valeur f minimale dans leae
  * @param [in-out] t
- * @param [in] i, indice dans leae de l'état
+ * @param [in] i, indice dans leae de l'Ã©tat
  * @return true si unique valeur de f minimale dans leae, false sinon
 */
 bool f_min(Taquin& t, unsigned int i)
@@ -212,9 +212,9 @@ bool f_min(Taquin& t, unsigned int i)
 }
 
 /**
- * @brief Indique si parmi les états de LEAE de même valeur f minimale, l'état de LEAE est de valeur h minimale
+ * @brief Indique si parmi les Ã©tats de LEAE de mÃªme valeur f minimale, l'Ã©tat de LEAE est de valeur h minimale
  * @param [in] t
- * @param [in] i, indice dans leae de l'état
+ * @param [in] i, indice dans leae de l'Ã©tat
  * @return true si oui, false sinon
 */
 bool h_min(Taquin& t, unsigned int i)
@@ -245,9 +245,9 @@ bool h_min(Taquin& t, unsigned int i)
 }
 
 /**
- * @brief Retourne l’état le plus récemment inséré dans LEAE parmi les états de LEAE de même valeur f minimale et de même valeur h minimale)
+ * @brief Retourne lâ€™Ã©tat le plus rÃ©cemment insÃ©rÃ© dans LEAE parmi les Ã©tats de LEAE de mÃªme valeur f minimale et de mÃªme valeur h minimale)
  * @param [in] t
- * @return l'indice de l'état dans leae
+ * @return l'indice de l'Ã©tat dans leae
 */
 unsigned int h_min_rec(Taquin& t)
 {
@@ -284,9 +284,9 @@ unsigned int h_min_rec(Taquin& t)
 }
 
 /**
- * @brief jouer, pour faire une itération de l'algorithme de recherche
- * @param [in-out] Taquin t, le taquin à résoudre
- * @return true si solution trouvée, false sinon
+ * @brief jouer, pour faire une itÃ©ration de l'algorithme de recherche
+ * @param [in-out] Taquin t, le taquin Ã  rÃ©soudre
+ * @return true si solution trouvÃ©e, false sinon
 */
 bool jouer(Taquin& t)
 {
@@ -323,13 +323,13 @@ bool jouer(Taquin& t)
         return true;
     }
 
-    // Déplacement du dernier état ajouté dans leae dans lee
-    // NB: A modifier quand l'heuristque sera à traiter
+    // DÃ©placement du dernier Ã©tat ajoutÃ© dans leae dans lee
+    // NB: A modifier quand l'heuristque sera Ã  traiter
     deplacer(t.leae, t.lee, iCourant, longueur(t.lee));
 
     Etat temp;
 
-    // Si c'est possible, on insère dans leae les états qui découlent du dernier état entré dans lee
+    // Si c'est possible, on insÃ¨re dans leae les Ã©tats qui dÃ©coulent du dernier Ã©tat entrÃ© dans lee
     if(courant.x > 0)
     {
         if(!appartient(deplacement(NORD, courant), t))
@@ -372,7 +372,7 @@ bool jouer(Taquin& t)
 
 /**
  * @brief Afficher la solution du taquin
- * @param [in-out] Taquin t, le taquin à résoudre
+ * @param [in-out] Taquin t, le taquin Ã  rÃ©soudre
 */
 void afficherSolution(Taquin& t)
 {
